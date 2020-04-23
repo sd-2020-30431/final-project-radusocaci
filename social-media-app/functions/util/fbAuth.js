@@ -22,6 +22,7 @@ module.exports = (req, resp, next) => {
         })
         .then(data => {
             req.user.handle = data.docs[0].data().handle;
+            req.user.imageUrl = data.docs[0].data().imageUrl; // less db calls for comments
             return next();
         })
         .catch(err => {
