@@ -112,7 +112,7 @@ exports.deleteScream = async (req, resp) => {
 exports.createComment = async (req, resp) => {
     if (req.body.body.trim() === '') {
         return resp.status(400).json({
-            error: 'Must not be empty'
+            comment: 'Must not be empty'
         });
     }
 

@@ -61,7 +61,7 @@ exports.signup = async (req, resp) => {
                 });
             } else {
                 return resp.status(500).json({
-                    error: err.code
+                    general: 'Something went wrong, please try again'
                 });
             }
         });
@@ -88,15 +88,10 @@ exports.login = async (req, resp) => {
         })
         .catch(err => {
             console.error(err);
-            if (err.code === 'auth/wrong-password') {
-                return resp.status(403).json({
-                    general: 'Wrong credentials, please try again'
-                });
-            } else {
-                return resp.status(500).json({
-                    error: err.code
-                });
-            }
+            return resp.status(500).json({
+                error: err.code
+            });
+
         });
 };
 
@@ -200,12 +195,7 @@ exports.getAuthenticatedUser = async (req, resp) => {
             userData.notifications = [];
             data.forEach(doc => {
                 userData.notifications.push({
-                    recipient: doc.data().recipient,
-                    sender: doc.data().sender,
-                    createdAt: doc.data().createdAt,
-                    screamId: doc.data().screamId,
-                    type: doc.data().type,
-                    read: doc.data().read,
+                    ...doc.data(),
                     notificationId: doc.id
                 });
             });
@@ -241,12 +231,7 @@ exports.getUserDetails = async (req, resp) => {
             userData.screams = [];
             data.forEach(doc => {
                 userData.screams.push({
-                    body: doc.data().body,
-                    createdAt: doc.data().createdAt,
-                    userHandle: doc.data().userHandle,
-                    userImage: doc.data().userImage,
-                    likeCount: doc.data().likeCount,
-                    commentCount: doc.data().commentCount,
+                    ...doc.data(),
                     screamId: doc.id,
                 });
             });
@@ -268,7 +253,7 @@ exports.markNotificationsRead = async (req, resp) => {
             read: true
         });
     });
-    batch.commit()
+    await batch.commit()
         .then(() => {
             return resp.json({
                 message: 'Notifications marked as read'
