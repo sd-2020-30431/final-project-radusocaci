@@ -88,8 +88,8 @@ exports.login = async (req, resp) => {
         })
         .catch(err => {
             console.error(err);
-            return resp.status(500).json({
-                error: err.code
+            return resp.status(403).json({
+                general: 'Wrong credentials, please try again'
             });
 
         });
