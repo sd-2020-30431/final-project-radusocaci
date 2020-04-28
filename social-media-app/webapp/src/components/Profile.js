@@ -11,10 +11,11 @@ import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import dayjs from 'dayjs';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import Tooltip from '@material-ui/core/Tooltip';
 import {logoutUser, uploadImage} from '../redux/actions/userActions';
+import {KeyboardReturn} from '@material-ui/icons';
+import EditDetails from './EditDetails';
+import CustomButton from '../util/CustomButton';
 
 const styles = (theme) => ({
     ...theme.others
@@ -32,6 +33,10 @@ class Profile extends Component {
     handleEditPicture = () => { // trigger image selection using custom button
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
+    };
+
+    handleLogout = () => {
+        this.props.logoutUser();
     };
 
     render() {
@@ -62,13 +67,11 @@ class Profile extends Component {
                                id={'imageInput'}
                                hidden={'hidden'}
                                onChange={this.handleImageChange}/>
-                        <Tooltip title={'Edit profile picture'}
-                                 placement={'top'}>
-                            <IconButton onClick={this.handleEditPicture}
-                                        className={'button'}>
-                                <EditIcon color={'primary'}/>
-                            </IconButton>
-                        </Tooltip>
+                        <CustomButton tip={'Edit profile picture'}
+                                      onClick={this.handleEditPicture}
+                                      btnClassName={'button'}>
+                            <EditIcon color={'primary'}/>
+                        </CustomButton>
                     </div>
                     <hr/>
                     <div className="profile-details">
@@ -101,6 +104,11 @@ class Profile extends Component {
                         <CalendarToday color={'primary'}/>{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                     </div>
+                    <CustomButton tip={'Log Out'}
+                                  onClick={this.handleLogout}>
+                        <KeyboardReturn color={'primary'}/>
+                    </CustomButton>
+                    <EditDetails/>
                 </div>
             </Paper>
         ) : (

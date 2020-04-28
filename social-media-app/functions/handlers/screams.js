@@ -9,7 +9,7 @@ exports.getScreams = async (req, resp) => {
             let screams = [];
             data.forEach(doc => {
                 screams.push({
-                    id: doc.id,
+                    screamId: doc.id,
                     ...doc.data()  // unpack all properties
                 });
             });
