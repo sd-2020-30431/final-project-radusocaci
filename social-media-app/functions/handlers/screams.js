@@ -19,6 +19,12 @@ exports.getScreams = async (req, resp) => {
 };
 
 exports.createScream = async (req, resp) => {
+    if (req.body.body.trim() === '') {
+        return resp.status(400).json({
+            body: 'Body must not be empty'
+        });
+    }
+
     const newScream = {
         body: req.body.body,
         userHandle: req.user.handle,

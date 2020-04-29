@@ -1,4 +1,13 @@
-import {DELETE_SCREAM, LIKE_SCREAM, LOADING_DATA, SET_SCREAMS, UNLIKE_SCREAM} from '../types';
+import {
+    DELETE_SCREAM,
+    LIKE_SCREAM,
+    LOADING_DATA,
+    POST_SCREAM,
+    SET_SCREAM,
+    SET_SCREAMS,
+    SUBMIT_COMMENT,
+    UNLIKE_SCREAM
+} from '../types';
 
 const initialState = {
     screams: [],
@@ -14,10 +23,21 @@ export default function (state = initialState, action) { //initial value like py
                 screams: action.payload,
                 loading: false
             };
+        case SET_SCREAM:
+            return {
+                ...state,
+                scream: action.payload
+            };
         case LIKE_SCREAM:
         case UNLIKE_SCREAM:
             let index = state.screams.findIndex((scream) => scream.screamId === action.payload.screamId);
             state.screams[index] = action.payload;
+            if (state.scream.screamId === action.payload.screamId) {
+                state.scream = {
+                    ...state.scream,
+                    likeCount: action.payload.likeCount
+                };
+            }
             return {
                 ...state
             };
@@ -30,6 +50,31 @@ export default function (state = initialState, action) { //initial value like py
             state.screams = state.screams.filter(scream => scream.screamId !== action.payload);
             return {
                 ...state
+            };
+        case POST_SCREAM:
+            return {
+                ...state,
+                screams: [
+                    action.payload,
+                    ...state.screams
+                ]
+            };
+        case SUBMIT_COMMENT:
+            let index2 = state.screams.findIndex((scream) => scream.screamId === action.payload.screamId);
+            state.screams[index2] = {
+                ...state.screams[index2],
+                commentCount: state.screams[index2].commentCount + 1
+            };
+            return {
+                ...state,
+                scream: {
+                    ...state.scream,
+                    commentCount: state.scream.commentCount + 1,
+                    comments: [
+                        action.payload,
+                        ...state.scream.comments
+                    ]
+                }
             };
         default:
             return state;
