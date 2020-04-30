@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 });
 
 AuthRoute.propTypes = {
-    authenticated: PropTypes.object.isRequired
+    authenticated: PropTypes.object
 };
 
 export default connect(mapStateToProps)(AuthRoute);

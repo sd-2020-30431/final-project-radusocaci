@@ -94,6 +94,31 @@ export default {
             '& a': {
                 margin: '20px 10px'
             }
+        },
+        handle: {
+            width: 60,
+            height: 18,
+            backgroundColor: '#00bcd4',
+            opacity: 0.5,
+            marginBottom: 7
+        },
+        date: {
+            height: 14,
+            width: 100,
+            backgroundColor: 'rgba(0,0,0, 0.3)',
+            marginBottom: 10
+        },
+        fullLine: {
+            height: 15,
+            width: '90%',
+            backgroundColor: 'rgba(0,0,0, 0.4)',
+            marginBottom: 10
+        },
+        halfLine: {
+            height: 15,
+            width: '50%',
+            backgroundColor: 'rgba(0,0,0, 0.5)',
+            marginBottom: 10
         }
     }
 };

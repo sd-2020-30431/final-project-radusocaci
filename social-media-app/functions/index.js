@@ -6,6 +6,9 @@ const {signup, login, uploadImage, addUserDetails, getAuthenticatedUser, getUser
 const FBAuth = require('./util/fbAuth');
 const {db} = require('./util/admin');
 
+const cors = require('cors');
+app.use(cors());
+
 exports.api = functions.region('europe-west2').https.onRequest(app);
 
 

@@ -4,6 +4,7 @@ import './App.css';
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import Home from './pages/home';
+import User from './pages/user';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import Navbar from './components/navbar';
@@ -17,6 +18,8 @@ import {getUserData, logoutUser} from './redux/actions/userActions';
 import axios from 'axios';
 
 const theme = createMuiTheme(themee);
+
+axios.defaults.baseURL = 'https://europe-west2-social-app-sd.cloudfunctions.net/api'
 
 const token = localStorage.getItem('idToken');
 if (token) {
@@ -50,6 +53,12 @@ function App() {
                             <AuthRoute exact
                                        path="/signup"
                                        component={Signup}/>
+                            <Route exact
+                                   path={'/users/:handle'}
+                                   component={User}/>
+                            <Route exact
+                                   path={'/users/:handle/scream/:screamId'}
+                                   component={User}/>
                         </Switch>
                     </div>
                 </Router>

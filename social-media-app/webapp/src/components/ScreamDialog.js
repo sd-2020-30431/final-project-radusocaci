@@ -43,18 +43,36 @@ class ScreamDialog extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            open: false
+            open: false,
+            oldPath: '',
+            newPath: ''
         };
     }
 
+    componentDidMount() {
+        if (this.props.openDialog) {
+            this.handleOpen();
+        }
+    }
+
     handleOpen = () => {
+        let oldPath = window.location.pathname;
+        const {userHandle, screamId} = this.props;
+        const newPath = `/users/${userHandle}/scream/${screamId}`;
+        if (oldPath === newPath) {
+            oldPath = `/users/${userHandle}`;
+        }
+        window.history.pushState(null, null, newPath); // simply change to url
         this.setState({
-            open: true
+            open: true,
+            oldPath,
+            newPath
         });
         this.props.getScream(this.props.screamId);
     };
 
     handleClose = () => {
+        window.history.pushState(null, null, this.state.oldPath);
         this.setState({
             open: false
         });
@@ -146,7 +164,8 @@ ScreamDialog.propTypes = {
     screamId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     scream: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 };
 
 const mapActionsToProps = {

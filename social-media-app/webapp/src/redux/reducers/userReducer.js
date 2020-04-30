@@ -1,4 +1,12 @@
-import {LIKE_SCREAM, LOADING_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, SET_USER, UNLIKE_SCREAM} from '../types';
+import {
+    LIKE_SCREAM,
+    LOADING_USER,
+    NOTIFICATIONS_READ,
+    SET_AUTHENTICATED,
+    SET_UNAUTHENTICATED,
+    SET_USER,
+    UNLIKE_SCREAM
+} from '../types';
 
 const initialState = {
     authenticated: false,
@@ -43,6 +51,11 @@ export default function (state = initialState, action) { //initial value like py
             return {
                 ...state,
                 likes: state.likes.filter(like => like.screamId !== action.payload.screamId)
+            };
+        case NOTIFICATIONS_READ:
+            state.notifications.forEach(notification => notification.read = true);
+            return {
+                ...state
             };
         default:
             return state;

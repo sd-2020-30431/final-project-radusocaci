@@ -81,7 +81,8 @@ class Scream extends Component {
                     </CustomButton>
                     <span>{commentCount} Comments</span>
                     <ScreamDialog screamId={screamId}
-                                  userHandle={userHandle}/>
+                                  userHandle={userHandle}
+                                  openDialog={this.props.openDialog}/>
                 </CardContent>
             </Card>
         );
@@ -95,7 +96,8 @@ const mapStateToProps = (state) => ({
 Scream.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
-    scream: PropTypes.object.isRequired
+    scream: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(Scream));

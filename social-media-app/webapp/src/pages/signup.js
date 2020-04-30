@@ -95,7 +95,7 @@ class Signup extends Component {
                         <TextField id={'confirmPassword'}
                                    name={'confirmPassword'}
                                    type={'password'}
-                                   label={'confirmPassword'}
+                                   label={'confirm password'}
                                    className={classes.textField}
                                    helperText={errors.confirmPassword}
                                    error={!!errors.confirmPassword}

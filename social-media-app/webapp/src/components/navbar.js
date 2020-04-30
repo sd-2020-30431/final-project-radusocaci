@@ -7,8 +7,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import CustomButton from '../util/CustomButton';
-import {Home, Notifications} from '@material-ui/icons';
+import {Home} from '@material-ui/icons';
 import PostScream from './PostScream';
+import Notifications from './Notifications';
 
 class Navbar extends Component {
     render() {
@@ -24,9 +25,7 @@ class Navbar extends Component {
                                     <Home color={'primary'}/>
                                 </CustomButton>
                             </Link>
-                            <CustomButton tip={'Notifications'}>
-                                <Notifications color={'primary'}/>
-                            </CustomButton>
+                                <Notifications/>
                         </Fragment>
                     ) : (
                         <Fragment>

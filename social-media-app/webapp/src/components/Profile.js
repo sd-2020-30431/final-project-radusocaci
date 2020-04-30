@@ -16,6 +16,7 @@ import {logoutUser, uploadImage} from '../redux/actions/userActions';
 import {KeyboardReturn} from '@material-ui/icons';
 import EditDetails from './EditDetails';
 import CustomButton from '../util/CustomButton';
+import ProfileSkeleton from '../util/ProfileSkeleton';
 
 const styles = (theme) => ({
     ...theme.others
@@ -132,7 +133,7 @@ class Profile extends Component {
                     </Button>
                 </div>
             </Paper>
-        )) : (<p>loading...</p>);
+        )) : <ProfileSkeleton/>;
     }
 }
 
