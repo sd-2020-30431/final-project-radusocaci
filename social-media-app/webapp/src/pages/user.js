@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Scream from '../components/Scream';
 import StaticProfile from '../components/StaticProfile';
 import ScreamSkeleton from '../util/ScreamSkeleton';
+import ProfileSkeleton from '../util/ProfileSkeleton';
 
 class User extends Component {
 
@@ -73,7 +74,7 @@ class User extends Component {
                 <Grid item
                       sm={4}
                       xs={12}>
-                    {this.state.profile ? <StaticProfile profile={this.state.profile}/> : <p>Loading...</p>}
+                    {this.state.profile ? <StaticProfile profile={this.state.profile}/> : <ProfileSkeleton/>}
                 </Grid>
             </Grid>
         );

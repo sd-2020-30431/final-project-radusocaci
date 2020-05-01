@@ -105,7 +105,7 @@ class Signup extends Component {
                         <TextField id={'handle'}
                                    name={'handle'}
                                    type={'text'}
-                                   label={'handle'}
+                                   label={'username'}
                                    className={classes.textField}
                                    helperText={errors.handle}
                                    error={!!errors.handle}
